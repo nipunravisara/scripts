@@ -1,12 +1,14 @@
 #!/bin/sh
 
-wallpaper="$(ls $HOME/Pictures/Wallpapers | dmenu -l 20)"
+dir="$HOME/Pictures/Wallpapers/"
+
+wallpaper="$(ls $dir | rofi -dmenu -p "Wallpapers")"
 
 if [ -z "$wallpaper" ];
 then
 	notify-send " ♻️ Aborted" "Task aborted."
 else
-	pass=$(echo"" | dmenu -p "🔐 Enter password: " )
+	pass=$(echo"" | rofi -dmenu -p "🔐 Enter password: " )
 
 	printf "[I] Setting wallpaper.. \\n"
 	nitrogen --set-centered --save $HOME/Pictures/Wallpapers/$wallpaper
