@@ -8,23 +8,19 @@ if [ -z "$wallpaper" ];
 then
 	notify-send " ♻️ Aborted" "Task aborted."
 else
-	pass=$(echo"" | rofi -dmenu -p "🔐 Enter password: " )
+	pass=$(rofi -dmenu -password -i -no-fixed-num-lines -p "Password: " -theme "$HOME/.config/rofi/themes/password.rasi")
 
 	printf "[I] Setting wallpaper.. \\n"
-	nitrogen --set-centered --save $HOME/Pictures/Wallpapers/$wallpaper
-	wal -i $HOME/Pictures/Wallpapers/$wallpaper
-
-	printf "[I] Updating dwm colors.. \\n"
-	sed -i '/SchemeUrg/d' $HOME/.cache/wal/colors-wal-dwm.h
+	wal -i $dir$wallpaper -o "feh --bg-fill $dir$wallpaper" -q
 
 	printf "[I] Compiling dwm.. \\n"
-	(cd $HOME/.local/src/dwm && echo "$pass" | sudo -S make clean install>/dev/null)
+	(cd $HOME/dwm && echo "$pass" | sudo -S make clean install>/dev/null)
 
 	printf "[I] Compiling dmenu.. \\n"
-	(cd $HOME/.local/src/dmenu && echo "$pass" | sudo -S make clean install>/dev/null)
+	(cd $HOME/dmenu && echo "$pass" | sudo -S make clean install>/dev/null)
 
 	printf "[I] Compiling st.. \\n"
-	(cd $HOME/.local/src/st && echo "$pass" | sudo -S make clean install>/dev/null)
+	(cd $HOME/st && echo "$pass" | sudo -S make clean install>/dev/null)
 
 	notify-send " ✅ Successful" "Enjoy your new theme."
 fi
