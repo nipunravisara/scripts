@@ -1,26 +1,23 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 dir="$HOME/Pictures/Wallpapers/"
 
-wallpaper="$(ls $dir | rofi -dmenu -p "Wallpapers")"
+# rofi -e "Loading wallpapers"
+wallpaper="$(ls $dir | rofi -dmenu -p "Wallpapers" -theme "$HOME/.config/rofi/themes/themes.rasi")"
 
 if [ -z "$wallpaper" ];
 then
-	notify-send " ♻️ Aborted" "Task aborted."
+	notify-send "Aborted" "Task aborted."
 else
 	pass=$(rofi -dmenu -password -i -no-fixed-num-lines -p "Password: " -theme "$HOME/.config/rofi/themes/password.rasi")
+	wal -i $dir$wallpaper -q
+	feh --bg-fill $dir$wallpaper
 
-	printf "[I] Setting wallpaper.. \\n"
-	wal -i $dir$wallpaper -o "feh --bg-fill $dir$wallpaper" -q
+	{
+		(cd $HOME/dwm && echo "$pass" | sudo -S make clean install)
+		(cd $HOME/dmenu && echo "$pass" | sudo -S make clean install)
+		(cd $HOME/st && echo "$pass" | sudo -S make clean install)
+	} &> /dev/null
 
-	printf "[I] Compiling dwm.. \\n"
-	(cd $HOME/dwm && echo "$pass" | sudo -S make clean install>/dev/null)
-
-	printf "[I] Compiling dmenu.. \\n"
-	(cd $HOME/dmenu && echo "$pass" | sudo -S make clean install>/dev/null)
-
-	printf "[I] Compiling st.. \\n"
-	(cd $HOME/st && echo "$pass" | sudo -S make clean install>/dev/null)
-
-	notify-send " ✅ Successful" "Enjoy your new theme."
+	notify-send "Successful" "Enjoy your new theme."
 fi
