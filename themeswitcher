@@ -5,10 +5,8 @@ dir="$HOME/Pictures/Wallpapers/"
 # rofi -e "Loading wallpapers"
 wallpaper="$(ls $dir | rofi -dmenu -theme "$HOME/.config/rofi/themes/themes.rasi")"
 
-if [ -z "$wallpaper" ];
+if [[ ! -z "$wallpaper" ]];
 then
-	notify-send "Aborted" "Task aborted."
-else
 	pass=$(rofi -dmenu -password -i -no-fixed-num-lines -p "Password: " -theme "$HOME/.config/rofi/themes/password.rasi")
 	wal -i $dir$wallpaper -q
 	feh --bg-fill $dir$wallpaper
