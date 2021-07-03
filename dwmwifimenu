@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-bssId=$(nmcli device wifi list | sed -n '1!p' | cut -b 9- | rofi -dmenu "🔰 Select: " -l 20 | cut -d' ' -f1)
-pass=$(echo"" | dmenu -p "🔐 Enter wifi password: " )
-echo $bssId
-nmcli device connect $bssId password $pass

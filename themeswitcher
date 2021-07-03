@@ -3,7 +3,7 @@
 dir="$HOME/Pictures/Wallpapers/"
 
 # rofi -e "Loading wallpapers"
-wallpaper="$(ls $dir | rofi -dmenu -p "Wallpapers" -theme "$HOME/.config/rofi/themes/themes.rasi")"
+wallpaper="$(ls $dir | rofi -dmenu -theme "$HOME/.config/rofi/themes/themes.rasi")"
 
 if [ -z "$wallpaper" ];
 then
