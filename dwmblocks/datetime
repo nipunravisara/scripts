@@ -1,0 +1,5 @@
+#!/bin/sh
+
+icon=""
+time=$(date +"%l:%M %p"| sed 's/  / /g')
+printf "%s %s \\n" "$icon" "$time"
