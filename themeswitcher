@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#! /bin/bash
 
 dir="$HOME/Pictures/Wallpapers/"
 
@@ -13,15 +13,11 @@ if [[ ! -z "$wallpaper" && ! -z "$pass" ]]
 then
 	wal -i $dir$wallpaper -n -q
 	feh --bg-fill $dir$wallpaper
-
+	
 	sed -i '/.*SchemeNorm*./c\   [SchemeNorm] = { sel_bg,     norm_bg,   norm_border }, // unfocused wins' $HOME/.cache/wal/colors-wal-dwm.h
 	sed -i '/.*SchemeSel*./c\    [SchemeSel]  = { norm_fg,      norm_bg,    sel_border },  // the focused win' $HOME/.cache/wal/colors-wal-dwm.h
 
-	{
-		(cd $HOME/dwm && echo "$pass" | sudo -S make clean install)
-#		(cd $HOME/dmenu && echo "$pass" | sudo -S make clean install)
-#		(cd $HOME/st && echo "$pass" | sudo -S make clean install)
-	} &> /dev/null
+	(cd $HOME/dwm && echo "$pass" | sudo -S make clean install)  &> /dev/null
 
 	notify-send "Successful" "Enjoy your new theme."
 fi

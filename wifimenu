@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#! /bin/bash
 
 bssid="$(nmcli --fields "SSID, BSSID, ,SIGNAL, BARS, SECURITY" device wifi list | sed -n '1!p' | rofi -dmenu -theme "$HOME/.config/rofi/themes/wifimenu.rasi" | awk '{print $2}')"
 pass=""

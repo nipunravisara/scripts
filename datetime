@@ -1,4 +1,4 @@
-#!/bin/sh
+#! /bin/bash
 
 icon=""
 time=$(date +"%l:%M %p"| sed 's/  / /g')

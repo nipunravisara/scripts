@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#! /bin/bash
 
 device="$(blkid | grep "sda" | cut -d" " -f1,2 | rofi -dmenu -theme "$HOME/.config/rofi/themes/devices.rasi" | cut -d":" -f1)"
 

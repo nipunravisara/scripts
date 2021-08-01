@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#! /bin/bash
 
 date=$(date '+%b %d (%a) %H:%M')
 icon='📅'
